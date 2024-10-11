@@ -139,7 +139,7 @@ class Isolate extends Widget_Base {
 				'type'          => Controls_Manager::URL,
 				'show_external' => false,
 				'default'       => [
-					'url' => '//clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+					'url' => '//test-videos.co.uk/vids/bigbuckbunny/mp4/av1/1080/Big_Buck_Bunny_1080_10s_1MB.mp4',
 				],
 				'placeholder'   => '//example.com/video.mp4',
 				'label_block'   => true,
@@ -529,11 +529,21 @@ class Isolate extends Widget_Base {
             ]
         );
 
+        /**
+		 * TODO: It should be removed after 3.18.0 release
+		 */
         $repeater->add_control(
             'social_link',
-            [
-                'label' => __('Link', 'bdthemes-prime-slider'),
-                'type' => Controls_Manager::TEXT,
+            [ 
+                'label'   => __( 'Link', 'bdthemes-prime-slider' ),
+                'type'    => Controls_Manager::HIDDEN,
+            ]
+        );
+        $repeater->add_control(
+            'social_icon_link',
+            [ 
+                'label'   => __( 'Link', 'bdthemes-prime-slider' ),
+                'type'    => Controls_Manager::URL,
             ]
         );
 
@@ -552,28 +562,28 @@ class Isolate extends Widget_Base {
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        'social_link' => __('http://www.facebook.com/bdthemes/', 'bdthemes-prime-slider'),
+                        'social_icon_link' => [ 'url' => 'http://www.facebook.com/bdthemes/' ],
                         'social_icon' => [
                             'value' => 'fab fa-facebook-f',
                             'library' => 'fa-brands',
                         ],
-                        'social_link_title' => 'Facebook',
+                        'social_link_title' => __('Facebook', 'bdthemes-prime-slider'),
                     ],
                     [
-                        'social_link' => __('http://www.twitter.com/bdthemes/', 'bdthemes-prime-slider'),
+                        'social_icon_link' => [ 'url' => 'http://www.twitter.com/bdthemes/' ],
                         'social_icon' => [
                             'value' => 'fab fa-twitter',
                             'library' => 'fa-brands',
                         ],
-                        'social_link_title' => 'Twitter',
+                        'social_link_title' => __('Twitter', 'bdthemes-prime-slider'),
                     ],
                     [
-                        'social_link' => __('http://www.instagram.com/bdthemes/', 'bdthemes-prime-slider'),
+                        'social_icon_link' => [ 'url' => 'http://www.instagram.com/bdthemes/' ],
                         'social_icon' => [
                             'value' => 'fab fa-instagram',
                             'library' => 'fa-brands',
                         ],
-                        'social_link_title' => 'Instagram',
+                        'social_link_title' => __('Instagram', 'bdthemes-prime-slider'),
                     ],
                 ],
                 'title_field' => '{{{ social_link_title }}}',
@@ -2359,25 +2369,18 @@ class Isolate extends Widget_Base {
     public function render_button($content) {
         $settings = $this->get_settings_for_display();
 
-        $this->add_render_attribute('slider-button', 'class', 'bdt-slide-btn', true);
-
-        if (isset($content['button_link']['url'])) {
-            $this->add_render_attribute('slider-button', 'href', esc_url($content['button_link']['url']), true);
-
-            if ($content['button_link']['is_external']) {
-                $this->add_render_attribute('slider-button', 'target', '_blank', true);
-            }
-
-            if ($content['button_link']['nofollow']) {
-                $this->add_render_attribute('slider-button', 'rel', 'nofollow', true);
-            }
-        } else {
-            $this->add_render_attribute('slider-button', 'href', 'javascript:void(0);', true);
+        if ( '' == $settings['show_button_text'] ) {
+            return;
         }
 
+        $this->add_render_attribute('slider-button', 'class', 'bdt-slide-btn', true);
+        if ($content['slide_button_text']) {
+            $this->add_link_attributes('slider-button', $content['button_link'], true);
+        }
+        
         ?>
 
-			<?php if ($content['slide_button_text'] && ('yes' == $settings['show_button_text'])): ?>
+			<?php if ($content['slide_button_text'] && ('yes' == $settings['show_button_text']) && ! empty($content['button_link']['url'])): ?>
 
 				<a <?php $this->print_render_attribute_string('slider-button');?>>
 
@@ -2421,30 +2424,29 @@ class Isolate extends Widget_Base {
 
 		if ($slide['image_link_type']) {
 			if ('google-map' == $slide['image_link_type'] and '' != $slide['image_link_google_map']) {
-				$this->add_render_attribute('lightbox-content-' . $index, 'href', esc_url($slide['image_link_google_map']['url']));
+                $this->add_link_attributes('lightbox-content-' . $index, $slide['image_link_google_map']);
 				$this->add_render_attribute('lightbox-content-' . $index, 'data-type', 'iframe');
 			} elseif ('video' == $slide['image_link_type'] and '' != $slide['image_link_video']) {
-				$this->add_render_attribute('lightbox-content-' . $index, 'href', esc_url($slide['image_link_video']['url']));
+                $this->add_link_attributes('lightbox-content-' . $index, $slide['image_link_video']);
 				$this->add_render_attribute('lightbox-content-' . $index, 'data-type', 'video');
 			} elseif ('youtube' == $slide['image_link_type'] and '' != $slide['lightbox_link']) {
-				$this->add_render_attribute('lightbox-content-' . $index, 'href', esc_url($slide['lightbox_link']['url']));
+                $this->add_link_attributes('lightbox-content-' . $index, $slide['lightbox_link']);
 				$this->add_render_attribute('lightbox-content-' . $index, 'data-type', false);
 			} elseif ('vimeo' == $slide['image_link_type'] and '' != $slide['image_link_vimeo']) {
-				$this->add_render_attribute('lightbox-content-' . $index, 'href', esc_url($slide['image_link_vimeo']['url']));
+                $this->add_link_attributes('lightbox-content-' . $index, $slide['image_link_vimeo']);
 				$this->add_render_attribute('lightbox-content-' . $index, 'data-type', false);
 			} else {
-				$this->add_render_attribute('lightbox-content-' . $index, 'href', esc_url($slide['image_link_website']['url']));
+                $this->add_link_attributes('lightbox-content-' . $index, $slide['image_link_website']);
 				$this->add_render_attribute('lightbox-content-' . $index, 'data-type', 'iframe');
 			}
 		} else {
 			if (!$image_url) {
 				$this->add_render_attribute('lightbox-content-' . $index, 'href', esc_url($slide['image']['url']));
+
 			} else {
 				$this->add_render_attribute('lightbox-content-' . $index, 'href', esc_url($image_url[0]));
 			}
 		}
-
-
 
         if ('shadow-pulse' == $settings['fancy_animation']) {
             $this->add_render_attribute('lightbox', 'class', 'bdt-slide-play-button bdt-position-center bdt-shadow-pulse reveal-muted', true);
@@ -2493,6 +2495,11 @@ class Isolate extends Widget_Base {
             }
         }
 
+        if ($slide_content['title']) {
+            $this->add_link_attributes('title-link', $slide_content['title_link'], true);
+        }
+        
+
         ?>
         <div class="bdt-slideshow-content-wrapper">
             <div class="bdt-prime-slider-wrapper">
@@ -2511,7 +2518,7 @@ class Isolate extends Widget_Base {
                             <div class="bdt-main-title">
                                 <<?php echo esc_attr(Utils::get_valid_html_tag($settings['title_html_tag'])); ?> class="bdt-title-tag" data-reveal="reveal-active" <?php echo wp_kses_post($parallax_title); ?>>
                                     <?php if ('' !== $slide_content['title_link']['url']): ?>
-                                        <a href="<?php echo esc_url($slide_content['title_link']['url']); ?>">
+                                        <a <?php $this->print_render_attribute_string('title-link');?>>
                                         <?php endif;?>
                                         <?php echo wp_kses_post(prime_slider_first_word($slide_content['title'])); ?>
                                         <?php if ('' !== $slide_content['title_link']['url']): ?>

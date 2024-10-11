@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-09-17 23:32:49+0000\n"
+"PO-Revision-Date: 2024-10-04 19:12:58+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,12 +21,12 @@ msgid "&ldquo;%s&rdquo; has been removed from your cart"
 msgstr "\"%s\" se quitó del carrito"
 
 #. translators: %s: is the field label
-#: src/StoreApi/Routes/V1/Checkout.php:219
+#: src/StoreApi/Routes/V1/Checkout.php:220
 msgid "There was a problem with the provided shipping address: %s is required"
 msgstr "Hubo un problema con la dirección de envío proporcionada: %s es requerido"
 
 #. translators: %s: is the field label
-#: src/StoreApi/Routes/V1/Checkout.php:211
+#: src/StoreApi/Routes/V1/Checkout.php:212
 msgid "There was a problem with the provided billing address: %s is required"
 msgstr "Hubo un problema con la dirección de facturación proporcionada: %s es requerido"
 
@@ -222,12 +222,12 @@ msgstr "Navegación superpuesta (en fase de pruebas)"
 msgid "Add %s"
 msgstr "Agregar %s"
 
-#: src/StoreApi/Routes/V1/Checkout.php:636
+#: src/StoreApi/Routes/V1/Checkout.php:637
 msgid "Please create a password for your account."
 msgstr "Creá una contraseña para tu cuenta."
 
 #. Translators: %s Email address.
-#: src/StoreApi/Routes/V1/Checkout.php:628
+#: src/StoreApi/Routes/V1/Checkout.php:629
 msgid "An account is already registered with %s. Please log in or use a different email address."
 msgstr "Ya hay una cuenta registrada con %s. Iniciá sesión o usá otra dirección de correo electrónico."
 
@@ -1157,6 +1157,16 @@ msgctxt "block title"
 msgid "Clear (Experimental)"
 msgstr "Borrar (en fase de pruebas)"
 
+#: src/Blocks/Patterns/PatternRegistry.php:32
+#: assets/client/admin/chunks/customize-store.js:1
+msgid "Services"
+msgstr "Servicios"
+
+#: src/Blocks/Patterns/PatternRegistry.php:28
+#: assets/client/admin/chunks/customize-store.js:1
+msgid "Intro"
+msgstr "Introducción"
+
 #. translators: %s: the order number, usually accompanied by a leading
 #. translators: %s: order number
 #: templates/myaccount/orders.php:56 templates/myaccount/orders.php:79
@@ -1166,6 +1176,14 @@ msgstr "Ver número del pedido %s"
 #: src/Internal/Admin/Orders/ListTable.php:1117
 msgid "Orders are automatically put in the Refunded status when an admin or shop manager has fully refunded the order’s value after payment."
 msgstr "Los pedidos pasan automáticamente al estado Reembolsado cuando un administrador o gestor de la tienda haya reembolsado totalmente el valor del pedido tras el pago."
+
+#: templates/product-form/simple.php:26 templates/product-form/simple.php:27
+msgid "Translatable Label"
+msgstr "Etiqueta traducible"
+
+#: src/Internal/ProductAttributesLookup/LookupDataStore.php:775
+msgid "This setting only works when product data is stored in the posts table."
+msgstr "Este ajuste solo funciona cuando la información del producto está almacenada en la tabla de publicaciones."
 
 #: src/Internal/Admin/Orders/ListTable.php:1116
 msgid "The order was canceled by an admin or the customer."
@@ -3725,7 +3743,7 @@ msgstr "Tipo de descuento del cupón (p. ej. un porcentaje o una cantidad fija)"
 msgid "The coupon's unique code."
 msgstr "El código único del cupón."
 
-#: src/StoreApi/Routes/V1/Checkout.php:476
+#: src/StoreApi/Routes/V1/Checkout.php:477
 msgid "Unable to create order"
 msgstr "No se pudo crear el pedido"
 
@@ -6062,7 +6080,7 @@ msgstr "Descripción completa del producto en formato HTML."
 msgid "Invalid payment result received from payment method."
 msgstr "Resultado de pago no válido recibido del método de pago."
 
-#: src/StoreApi/Routes/V1/Checkout.php:557
+#: src/StoreApi/Routes/V1/Checkout.php:558
 #: src/StoreApi/Routes/V1/CheckoutOrder.php:244
 msgid "No payment method provided."
 msgstr "No se facilitó ningún método de pago."
@@ -25295,7 +25313,7 @@ msgid "Address changed successfully."
 msgstr "Dirección cambiada correctamente."
 
 #: includes/class-wc-form-handler.php:295 includes/wc-user-functions.php:54
-#: src/StoreApi/Routes/V1/Checkout.php:620
+#: src/StoreApi/Routes/V1/Checkout.php:621
 msgid "Please provide a valid email address."
 msgstr "Por favor escribe una dirección de correo electrónico válida."
 
